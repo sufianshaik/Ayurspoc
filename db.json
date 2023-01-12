@@ -1,0 +1,58 @@
+{
+  "medicalList": [
+    {
+      "id": 3,
+      "testGroup": "Gaamma",
+      "testName": "PTINR",
+      "units": "3",
+      "normalRange": "wqswq",
+      "trackable": "NO"
+    },
+    {
+      "id": 5,
+      "testGroup": "Ab + ",
+      "testName": "Inrito",
+      "units": "81",
+      "normalRange": "90",
+      "trackable": "YES"
+    },
+    {
+      "id": 6,
+      "testGroup": "Pyrox",
+      "testName": "Haeox",
+      "units": "13",
+      "normalRange": "122",
+      "trackable": "NO"
+    },
+    {
+      "id": 7,
+      "testGroup": "sathwik ",
+      "testName": "MAdhi ",
+      "units": "12",
+      "normalRange": "1212",
+      "trackable": "YES"
+    }
+  ],
+  "medicaltestsgroup": [
+    {
+      "id": 2,
+      "groupName": "Group 3 ",
+      "numberOfTests": "43 Tests"
+    },
+    {
+      "groupName": "Group 4 ",
+      "numberOfTests": "90 Tests ",
+      "id": 3
+    },
+    {
+      "groupName": "Group 6 ",
+      "numberOfTests": "tests 89 ",
+      "id": 4
+    },
+    {
+      "id": 5,
+      "groupName": "Group 9 ",
+      "numberOfTests": "Tests 9 "
+    }
+  ]
+}

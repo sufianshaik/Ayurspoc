@@ -11,3 +11,39 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#list{
+  color: green;
+  background: white;
+  font-size: 15px;
+}
+
+
+li{
+  list-style: none;
+}
+
+
+
+li::before{
+  content: "\00BB";
+}
+
+/* @brand-custom : #4FA293 ;
+.btn-custom {
+  .button-variant(#fff; @brand-custom; darken(@brand-custom, 5%));
+} */
+
+.bg-blue {
+  background-color: rgb(3, 108, 184);
+  
+}
+
+.bg-doctors{
+  background-color: rgb(201, 194, 194);
+  color: aliceblue;
+}
+
+option {
+  font-weight: bold;
+}
