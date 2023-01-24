@@ -33,7 +33,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "proxy": "http://localhost:9002",
-    "start": "set NODE_ENV=development && node dev-server ./webpack/config"
+    "start" : "node server.js"
   },
   "eslintConfig": {
     "extends": [
