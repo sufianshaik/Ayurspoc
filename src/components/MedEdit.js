@@ -7,19 +7,21 @@ import { AiOutlineClose } from 'react-icons/ai'
 
 
 function MedEdit() {
+    const [testGroup, testGroupchange] = useState("");
+    const [testName, testNamechange] = useState("");
+    const [units, unitschange] = useState("");
+    const [normalRange, normalRangechange] = useState("");
+    const [trackable, trackablechange] = useState("NO");
+
+    const navigate = useNavigate();
     const { medid } = useParams();
 
     useEffect(() => {
-        fetch("http://localhost:1000/medicalList/" + medid).then((res) => {
+        fetch(`http://localhost:6001/list-api/editlist/${medid}`).then((res) => {
             return res.json();
         }).then((resp) => {
-            idchange(resp.id);
-            if (testGroup != resp.testGroupchange) {
-                testGroupchange(resp.testGroup);
-            }
-            if (testName != resp.testNamechange) {
-                testGroupchange(resp.testGroup);
-            }
+            testGroupchange(resp.testGroup);
+            testGroupchange(resp.testGroup);
             testNamechange(resp.testName);
             unitschange(resp.units);
             normalRange(resp.normalRange);
@@ -29,22 +31,17 @@ function MedEdit() {
         })
     }, [] )
 
-    const [id, idchange] = useState("");
-    const [testGroup, testGroupchange] = useState("");
-    const [testName, testNamechange] = useState("");
-    const [units, unitschange] = useState("");
-    const [normalRange, normalRangechange] = useState("");
-    const [trackable, trackablechange] = useState("NO");
 
-    const navigate = useNavigate();
+   
 
-
+    console.log(medid);
     const handlesubmit = (e) => {
         e.preventDefault();
-        const meddata = { id, testGroup, testName, units, normalRange, trackable };
-        fetch("http://localhost:1000/medicalList/" + medid, {
+        const meddata = {testGroup, testName, units, normalRange, trackable };
+
+        fetch(`http://localhost:6001/list-api/editlist/${medid}`, {
             method: "PUT",
-            headers: { "content-type": "application/json" },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(meddata)
         }).then((req) => {
             alert('Saved Succesfully');
@@ -83,7 +80,8 @@ function MedEdit() {
                                     <div className="col-lg-12">
                                         <div className="form-group mb-2">
                                             {/* <label>Medical Test Group</label> */}
-                                            <input placeholder='Medical Test Group' value={testGroup} onChange={e => testGroupchange(e.target.value)} className="form-control"></input>
+                                
+                                            <input placeholder="Medical Test Group" value={testGroup} onChange={e => testGroupchange(e.target.value)} className="form-control"></input>
                                         </div>
                                     </div>
                                     {/* onMouseDown={e => testGroupchange(true)} */}

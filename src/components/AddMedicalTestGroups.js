@@ -7,7 +7,6 @@ import { AiOutlineClose } from 'react-icons/ai'
 
 
 function AddMedicalTestGroups() {
-    const [id, idchange] = useState("");
     const [groupName, groupNamechange] = useState("");
     const [numberOfTests, numberOfTestschange] = useState("");
 
@@ -17,7 +16,7 @@ function AddMedicalTestGroups() {
         e.preventDefault();
         const meddata = { groupName, numberOfTests}
         // console.log({id,testGroup,testName,units,normalRange,trackable});
-        fetch("http://localhost:1000/medicaltestsgroup", {
+        fetch("http://localhost:6001/group-list/create-list", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(meddata)

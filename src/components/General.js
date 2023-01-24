@@ -1,12 +1,8 @@
 import React from 'react'
-import Table from 'react-bootstrap/Table';
-import Badge from 'react-bootstrap/Badge';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { NavLink } from 'react-router-dom';
-import Form from 'react-bootstrap/Form'
 import { useNavigate } from 'react-router-dom';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import { Button } from 'react-bootstrap';
+import { Button,Table,Badge,Col,Form } from 'react-bootstrap';
 import DoctorDetails from './DoctorDetails';
 function General() {
   let DoctorsList = [
@@ -76,7 +72,7 @@ function General() {
                     <th className=''> <strong>Website</strong></th>
                     <th className=''> <strong>Patients</strong></th>
                     <th className=''> <strong>Payments</strong></th>
-                    <th className=''> <strong>Status</strong></th>
+                    <th className='d-flex me-auto'> <strong>Status</strong></th>
                   </tr>
                 </thead>
                 <tbody className='justify-content-around'>
@@ -120,7 +116,20 @@ function General() {
                               <p> {e.Payment} </p>
                             </td>
                             <td>
-                              <p> {e.Status} </p>
+                              {/* <p> {e.Status} </p> */}
+                              <div className='d-flex -justify-content-around'>
+                              {/* <h6 className='mt-2'>Status :</h6> */}
+                              <Col className="">
+                                <div className='d-flex mx-auto'>
+                                  <p className='m-2 text-success'>Active</p>
+                                  <Form.Check className='mt-2'
+                                    type="switch"
+                                    id="custom-switch"
+                                  />
+                                  <p className='m-2 text-danger'>Archive</p>
+                                </div>
+                              </Col>
+                            </div>
                             </td>
                           </tr>
                         </>

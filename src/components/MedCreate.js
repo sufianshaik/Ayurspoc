@@ -6,7 +6,7 @@ import { Form } from 'react-bootstrap';
 import { AiOutlineClose } from 'react-icons/ai'
 
 function MedCreate() {
-    const [id, idchange] = useState("");
+    // const [id, idchange] = useState("");
     const [testGroup, testGroupchange] = useState("");
     const [testName, testNamechange] = useState("");
     const [normalRange, normalRangechange] = useState("");
@@ -20,9 +20,9 @@ function MedCreate() {
         e.preventDefault();
         const meddata = { testGroup, testName, units, normalRange, trackable }
         // console.log({id,testGroup,testName,units,normalRange,trackable});
-        fetch("http://localhost:1000/medicalList", {
+        fetch("http://localhost:6001/list-api/create-list", {
             method: "POST",
-            headers: { "content-type": "application/json" },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(meddata)
         }).then((req) => {
             alert('Saved Succesfully');

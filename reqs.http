@@ -1,0 +1,32 @@
+###
+GET http://localhost:6001/list-api/getlists
+
+###
+POST http://localhost:6001/list-api/create-list
+Content-Type: application/json 
+
+{
+    "testGroup" : "munna" ,
+    "testName" : "honneu",
+    "normalRange" : "100 units",
+    "units" :"1001" ,
+    "trackable": "YES"
+}
+
+###
+DELETE http://localhost:6001/list-api/remove/Rathore
+
+###
+PUT http://localhost:6001/list-api/editlist/Sufian
+Content-Type : application/json
+
+{
+    "testGroup" : "Sufian",
+    "testName" : "Changed",
+    "normalRange" : "100 unis forme",
+    "units" :"forwARD" ,
+    "trackable": "no"
+}
+
+###
+GET http://localhost:6001/group-list/getlists

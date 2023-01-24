@@ -52,31 +52,25 @@ function Support() {
               <td>Doctor Name</td>
               <td>Contact Number</td>
               <td> Date </td>
-              <td>    <Button variant="outline-primary bg-primary text-white" onClick={()=>handle()}>Add</Button></td>
+              <td>    <Button variant="outline-primary bg-primary text-white" onClick={()=>handle()}>Add</Button> </td>
             </tr>
           </thead>
           <br />
-          {/* <tbody>
+          <tbody>
             {
-              listdata &&
-              listdata.map(item => (
-                <tr key={item.id} >
-                  <td>{item.id}</td>
-                  <td>{item.testGroup}</td>
-                  <td>{item.testName}</td>
-                  <td>{item.units}</td>
-                  <td>{item.normalRange}</td>
-                  <td>{item.trackable}</td>
-                  <td>
+                <tr >
+                  <td>issue Text</td>
+                  <td>view notes history</td>
+                  {/* <td>
                     <div className='g-0 mb-1'>
                       <a onClick={() => { LoadEdit(item.id) }} className="btn"><FiEdit2 /></a>
                       <a onClick={() => { RemoveList(item.id) }} className="btn"><AiOutlineDelete /></a>
                     </div>
-                  </td>
+                  </td> */}
                 </tr>
-              ))
+              
             }
-          </tbody> */}
+          </tbody>
         </table>
       </div>
 

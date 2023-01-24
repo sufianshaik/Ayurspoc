@@ -1,22 +1,56 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import Table from 'react-bootstrap/Table'
 import { FiEdit2 } from 'react-icons/fi'
 import { AiOutlineDelete } from 'react-icons/ai'
-import { Container, Dropdown, ButtonGroup, Button} from 'react-bootstrap'
+import { Container, Dropdown, ButtonGroup, Button, Table } from 'react-bootstrap'
+import axios from 'axios';
+
 
 function MedicalTests() {
-  const [listdata, listdatachange] = useState(null);
+
+  const [listdata, listdatachange] = useState("");
+
   useEffect(() => {
-    fetch("http://localhost:1000/medicalList").then((res) => {
-      return res.json();
-    }).then((resp) => {
-      listdatachange(resp);
-    }).catch((err) => {
-      console.log(err.message);
-    })
-  }, [])
+    const getdata = async () => {
+      let res = await axios.get('http://localhost:6001/list-api/getlists');
+      listdatachange(res.data.payload);
+    }
+    getdata();
+  },[]);
+
+
+  const [group,setgroup] = useState(null) ;
+
+  useEffect(()=>{
+    const getGroups = async () => {
+      let res = await axios.get('http://localhost:6001/group-list/getlists') ;
+      setgroup(res.data.payload.testGroup);
+    }
+    getGroups();
+  },[]);
+
+  console.log(group);
+
+  // let renderList = []
+  // // group.forEach(function(obj) {
+  // //   renderList.push(obj.testGroup);
+  // // });
+
+  // console.log(renderList)
+
+
+
+  
+  // useEffect(() => {
+  //   fetch("http://localhost:6001/list-api/getlists").then((res) => {
+  //     return res.json();
+  //   }).then((resp) => {
+  //     this.setstate({ llli : resp });
+  //     listdatachange(resp);
+  //   }).catch((err) => {
+  //     console.log(err.message);
+  //   })
+  // }, [])
 
   const navigate = useNavigate();
   const handle = () => {
@@ -26,17 +60,17 @@ function MedicalTests() {
     navigate('/MedicalTests/edit/' + id);
   }
 
-  const RemoveList = (id) => {
-    if (window.confirm('Do you want to remove?')) {
-      fetch("http://localhost:1000/medicalList/" + id, {
-        method: "DELETE"
+  const RemoveList = (testGroup) => {
+    // if (window.confirm('Do you want to remove?')) {
+      fetch(`http://localhost:6001/list-api/remove/${testGroup}`,{
+        method: "DELETE",
       }).then((res) => {
         alert('Removed successfully.')
         window.location.reload();
       }).catch((err) => {
         console.log(err.message)
       })
-    }
+    // }
   }
   // if (listdata) {
   //   listdata.map( item => {
@@ -59,7 +93,7 @@ function MedicalTests() {
         <table className="table ">
           <thead className="">
             <tr className=''>
-              <td><h6>S.No </h6> </td>
+              {/* <td><h6>S.No </h6> </td> */}
               <td><h6>Medical Test Name </h6></td>
               <td className='me-auto'>
               <span className=''>
@@ -84,7 +118,7 @@ function MedicalTests() {
               listdata &&
               listdata.map(item => (
                 <tr key={item.id} >
-                  <td>{item.id}</td>
+                  {/* <td>{item.id}</td> */}
                   <td>{item.testGroup}</td>
                   <td>{item.testName}</td>
                   <td>{item.units}</td>
@@ -95,8 +129,8 @@ function MedicalTests() {
                   
                   <td>
                     <div className='g-0 mb-1'>
-                      <a onClick={() => { LoadEdit(item.id) }} className="btn"><FiEdit2 /></a>
-                      <a onClick={() => { RemoveList(item.id) }} className="btn"><AiOutlineDelete /></a>
+                      <a onClick={() => { LoadEdit(item.testGroup) }} className="btn"><FiEdit2 /></a>
+                      <a onClick={() => { RemoveList(item.testGroup) }} className="btn"><AiOutlineDelete /></a>
                     </div>
                   </td>
                 </tr>

@@ -7,17 +7,15 @@ import { AiOutlineClose } from 'react-icons/ai'
 
 function EditMedicalTestGroups() {
     const  { meid }  = useParams();
-    const [id, idchange] = useState("");
     const [groupName, groupNamechange] = useState("");
     const [numberOfTests, numberOfTestschange] = useState("");
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:1000/medicaltestsgroup/" + meid).then((res) => {
+        fetch(`http://localhost:6001/group-list/editlist/${meid}`).then((res) => {
             return res.json();
         }).then((resp) => {
-            idchange(resp.id); 
             groupNamechange(resp.groupName);
             numberOfTestschange(resp.numberOfTests);
         }).catch((err) => {
@@ -27,11 +25,10 @@ function EditMedicalTestGroups() {
 
     const handlesubmit = (e) => {
         e.preventDefault();
-        const meddata = { id ,groupName, numberOfTests}; 
-        // console.log({id,testGroup,testName,units,normalRange,trackable});
-        fetch("http://localhost:1000/medicaltestsgroup/" + meid , {
+        const meddata = { groupName, numberOfTests}; 
+        fetch(`http://localhost:6001/group-list/editlist/${meid}`, {
             method: "PUT",
-            headers: { "content-type": "application/json" },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(meddata)
         }).then((req) => {
             alert('Saved Succesfully');

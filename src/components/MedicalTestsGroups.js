@@ -5,21 +5,18 @@ import { AiOutlineDelete } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import {add } from '../store/groupSlice' ;
+import axios from 'axios';
 
 function MedicalTestsGroups() {
-    const [grouplist,grouplistchange] = useState(null) ;
+    const [grouplist,grouplistchange] = useState("") ;
     
-    const state = useSelector((state) => state.groups)
-    console.log(state) ;
  
     useEffect(() => {
-        fetch("http://localhost:1000/medicaltestsgroup").then((res)=>{
-            return res.json(); 
-        }).then((resp)=>{
-            grouplistchange(resp);
-        }).catch((err)=>{
-            console.log(err.message); 
-        })
+      const getdata = async () => {
+        let res = await axios.get("http://localhost:6001/group-list/getlists") ;
+        grouplistchange(res.data.payload);
+      }
+      getdata() ;
     },[])
 
     const navigate = useNavigate();
@@ -32,9 +29,9 @@ function MedicalTestsGroups() {
         navigate('/MedicalTestsGroups/add-testgroup/') ;
     }
 
-    const RemoveList = (id) => {
+    const RemoveList = (testGroup) => {
         if (window.confirm('Do you want to remove?')) {
-          fetch("http://localhost:1000/medicaltestsgroup/" + id, {
+          fetch(`http://localhost:6001/group-list/remove/${testGroup}`, {
             method: "DELETE"
           }).then((res) => {
             alert('Removed successfully.')
@@ -76,13 +73,12 @@ function MedicalTestsGroups() {
                 grouplist && 
                 grouplist.map(item=>(
                     <tr key={item.id}> 
-                        <td>{item.id}</td>
                         <td>{item.groupName}</td>
                         <td>{item.numberOfTests}</td>
                         <td>
                             <div className='g-0 mb-1'>
-                            <a onClick={()=>{ LoadEdit(item.id)}} className="btn"><FiEdit2 /></a> 
-                            <a onClick={() => { RemoveList(item.id)}} className="btn"><AiOutlineDelete /></a>
+                            <a onClick={()=>{ LoadEdit(item.groupName)}} className="btn"><FiEdit2 /></a> 
+                            <a onClick={() => { RemoveList(item.groupName)}} className="btn"><AiOutlineDelete /></a>
                             </div>
                         </td>
                     </tr>
